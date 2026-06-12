@@ -1,1 +1,6 @@
-print("bienvenido al mejor Quiz de la historia del anime: ")
+import pygame 
+import os 
+
+pygame.mixer.init()
+
+mirai_nikki = ""
