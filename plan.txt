@@ -1,0 +1,5 @@
+#primero haz toda la interfaz necesaria para poder ejecutar le programa 
+#despues investiga como agregar las canciones
+
+reglas
+#trata de hacer todo lo mas modular posible
