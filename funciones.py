@@ -8,7 +8,7 @@ import random
 
 
 #LISTAS
-nombre_audios = {
+nombre_openings = {
  "Mirai nikki":  "audios anime/Mirai Nikki.mp3",   
   "Evangelion":   "audios anime/Evangelion.mp3",
   "jojos" : "audios anime/jojo op2.mp3",
@@ -22,24 +22,29 @@ nombre_audios = {
     
 }
 
-claves = nombre_audios.keys()
+claves = nombre_openings.keys()
 claves = list(claves)
 
 def canciones(cancion):
  pygame.mixer.init()
- pygame.mixer.music.load(nombre_audios[cancion])
+ pygame.mixer.music.load(nombre_openings[cancion])
  pygame.mixer.music.play()
 
  while pygame.mixer.music.get_busy():
     pass
 
 def reproducir_op_azar():
+ contador_positivo = 0
+ contador_negativo = 0
  while True:
+  print(f"has acertado: {contador_positivo}")
+  print(f"has fracasado: {contador_negativo}")
   op_azar = random.choice(claves)
   canciones(op_azar)
   cancion = input("ingrese la cancion: ")
   if cancion == op_azar:
       print("correcto")
+      contador_positivo +=1
   else:
      print("incorrecto")
-  
+     contador_negativo += 1
