@@ -15,9 +15,12 @@ nombre_audios = {
     
 }
 
+claves = nombre_audios.keys()
+claves = list(claves)
+
 def canciones(cancion):
  pygame.mixer.init()
- pygame.mixer.music.load(cancion)
+ pygame.mixer.music.load(nombre_audios[cancion])
  pygame.mixer.music.play()
 
  while pygame.mixer.music.get_busy():
