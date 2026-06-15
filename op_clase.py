@@ -1,5 +1,6 @@
 import pygame 
 import random
+import time
 pygame.mixer.init()
 
 
@@ -26,9 +27,12 @@ class op:
     duracion = audio.get_length()
     return duracion
 
- def reproductor():
-  pygame.mixer.music.load(op.seleccion_cancion_azar())
-  pygame.mixer.music.play()
-  while pygame.mixer.music.get_busy():
-    pass
+ def reproductor_incremento():
+    inicio = random.randint(0, int(op.calcular_duracion_cancion() / 2))
+    pygame.mixer.music.load(op.seleccion_cancion_azar())
+    pygame.mixer.music.play(start=inicio)
 
+    time.sleep(10)
+    pygame.mixer.music.stop()
+    
+     
