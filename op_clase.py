@@ -1,15 +1,11 @@
 import pygame 
-import os 
 import random
 pygame.mixer.init()
-#Datos sueltos 
 
 
-
-
-
-#LISTAS
-nombre_openings = {
+class op:
+ def seleccion_cancion_azar(): 
+  nombre_openings = {
  "Mirai nikki":  "audios anime/Mirai Nikki.mp3",   
   "Evangelion":   "audios anime/Evangelion.mp3",
   "jojos" : "audios anime/jojo op2.mp3",
@@ -19,26 +15,20 @@ nombre_openings = {
   "Nekomonogatari" : "audios anime/Nekomonogatari.mp3",
   "one piece" : "audios anime/one piece.mp3",
   "Shingeki no kyojin" : "audios anime/shingeki no kiojin.mp3",
-  "jujutsu" : "audios anime/JUJUTSU KAISEN Opening.mp3",
-    
-}
+  "jujutsu" : "audios anime/JUJUTSU KAISEN Opening.mp3",}
+  claves = nombre_openings.keys()
+  claves = list(claves)
+  op_azar = random.choice(claves)
+  return nombre_openings[op_azar]
 
-claves = nombre_openings.keys()
-claves = list(claves)
-def calcular_duracion_cancion(cancion):
-    audio = pygame.mixer.Sound(cancion)
+ def calcular_duracion_cancion():
+    audio = pygame.mixer.Sound(op.seleccion_cancion_azar())
     duracion = audio.get_length()
     return duracion
 
-
-def reproductor_azar():
- op_azar = random.choice(claves)
- pygame.mixer.music.load(nombre_openings[op_azar])
- pygame.mixer.music.play()
-
- while pygame.mixer.music.get_busy():
+ def reproductor():
+  pygame.mixer.music.load(op.seleccion_cancion_azar())
+  pygame.mixer.music.play()
+  while pygame.mixer.music.get_busy():
     pass
 
-
-  
-  
