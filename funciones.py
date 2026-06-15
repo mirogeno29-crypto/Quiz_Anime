@@ -1,6 +1,7 @@
 import pygame 
 import os 
 import random
+pygame.mixer.init()
 #Datos sueltos 
 
 
@@ -24,9 +25,12 @@ nombre_openings = {
 
 claves = nombre_openings.keys()
 claves = list(claves)
-
-def canciones(cancion):
- pygame.mixer.init()
+def calcular_duracion_cancion(cancion):
+    audio = pygame.mixer.Sound(cancion)
+    duracion = audio.get_length()
+    return duracion
+def reproductor(cancion):
+ 
  pygame.mixer.music.load(nombre_openings[cancion])
  pygame.mixer.music.play()
 
@@ -40,7 +44,7 @@ def reproducir_op_azar():
   print(f"has acertado: {contador_positivo}")
   print(f"has fracasado: {contador_negativo}")
   op_azar = random.choice(claves)
-  canciones(op_azar)
+  reproductor(op_azar)
   cancion = input("ingrese la cancion: ")
   if cancion == op_azar:
       print("correcto")
