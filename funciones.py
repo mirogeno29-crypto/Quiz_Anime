@@ -29,26 +29,16 @@ def calcular_duracion_cancion(cancion):
     audio = pygame.mixer.Sound(cancion)
     duracion = audio.get_length()
     return duracion
-def reproductor(cancion):
- 
- pygame.mixer.music.load(nombre_openings[cancion])
+
+
+def reproductor_azar():
+ op_azar = random.choice(claves)
+ pygame.mixer.music.load(nombre_openings[op_azar])
  pygame.mixer.music.play()
 
  while pygame.mixer.music.get_busy():
     pass
 
-def reproducir_op_azar():
- contador_positivo = 0
- contador_negativo = 0
- while True:
-  print(f"has acertado: {contador_positivo}")
-  print(f"has fracasado: {contador_negativo}")
-  op_azar = random.choice(claves)
-  reproductor(op_azar)
-  cancion = input("ingrese la cancion: ")
-  if cancion == op_azar:
-      print("correcto")
-      contador_positivo +=1
-  else:
-     print("incorrecto")
-     contador_negativo += 1
+
+  
+  
