@@ -22,18 +22,37 @@ class op:
   op_azar = random.choice(claves)
   return nombre_openings[op_azar]
 
- def calcular_duracion_cancion():
-    audio = pygame.mixer.Sound(op.seleccion_cancion_azar())
+ def calcular_duracion_cancion(cancion):
+    audio = pygame.mixer.Sound(cancion)
     duracion = audio.get_length()
     duracion = int(duracion)
     return duracion
 
  def reproductor_incremento():
-    inicio = random.randint(0,op.calcular_duracion_cancion())
-    pygame.mixer.music.load(op.seleccion_cancion_azar())
+    cancion = op.seleccion_cancion_azar()
+    duracion = op.calcular_duracion_cancion(cancion)
+    aumento = 10
+    decremento = 0
+    inicio = random.randint(0,duracion-10)
+    falta_de_cancion= duracion-inicio
+    pygame.mixer.music.load(cancion)
     pygame.mixer.music.play(start=inicio)
-
-    time.sleep(10)
+    time.sleep(aumento)
     pygame.mixer.music.stop()
+    while True:
+     aumentar = int(input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
+     if aumentar == 1:
+      aumento += 10
+      if falta_de_cancion >= aumento:
+       pygame.mixer.music.play(start=inicio)
+       time.sleep(aumento)
+       pygame.mixer.music.stop()
+      else:
+       while True:
+        decremento +=10
+        print("ejecutar")
+        pygame.mixer.music.play(start=inicio-decremento)
+        time.sleep(aumento)
+        pygame.mixer.music.stop()
     
      
