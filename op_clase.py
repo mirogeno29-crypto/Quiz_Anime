@@ -1,6 +1,7 @@
 import pygame 
 import random
 import time
+from difflib import SequenceMatcher
 pygame.mixer.init()
 
 
@@ -59,7 +60,17 @@ class op:
         time.sleep(aumento)
         pygame.mixer.music.stop()
  def  aciertos_op(nombre_usuario,nombre_real):
-    
+       similitud = SequenceMatcher(None,nombre_usuario,nombre_real)
+       if similitud > 0.8:
+          correctos += 1
+       else:
+          incorrectos +=1
+       print(f"""
+             correctos: {correctos}  
+             incorrectos: {incorrectos}
+               
+               
+               """)
     
     
       
