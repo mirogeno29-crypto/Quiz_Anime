@@ -2,7 +2,10 @@ import pygame
 import random
 import time
 from difflib import SequenceMatcher
+import os
 pygame.mixer.init()
+def limpiar_pantalla():
+       os.system("cls" if os.name == "nt" else "clear")
 
 
 class op:
@@ -37,6 +40,8 @@ class op:
     print(op.op_azar)
     aumento = 10
     decremento = 0
+    correcto = 0
+    incorrecto = 0
     inicio = random.randint(0,duracion-10)
     falta_de_cancion= duracion-inicio
     pygame.mixer.music.load(cancion)
@@ -48,30 +53,30 @@ class op:
      if aumentar == 1:
       aumento += 10
       if falta_de_cancion >= aumento:
+       print("ejecutar1")
        pygame.mixer.music.play(start=inicio)
        time.sleep(aumento)
        pygame.mixer.music.stop()
+      elif (aumento+decremento) >=duracion:
+         print("ejecutar 3")
+         pygame.mixer.music.play()
+         time.sleep(duracion)
+         pygame.mixer.music.stop()
       else:
-       while True:
         aumento += 10
         decremento +=10
-        print("ejecutar")
+        print("ejecutar2")
         pygame.mixer.music.play(start=inicio-decremento)
         time.sleep(aumento)
         pygame.mixer.music.stop()
  def  aciertos_op(nombre_usuario,nombre_real):
        similitud = SequenceMatcher(None,nombre_usuario,nombre_real)
        if similitud > 0.8:
-          correctos += 1
+          return True
        else:
-          incorrectos +=1
-       print(f"""
-             correctos: {correctos}  
-             incorrectos: {incorrectos}
-               
-               
-               """)
-    
+          return False
+       
+ 
     
       
  
