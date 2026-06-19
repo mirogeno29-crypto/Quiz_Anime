@@ -49,8 +49,11 @@ class op:
     time.sleep(aumento)
     pygame.mixer.music.stop()
     while True:
+     print(f"correctos: {correcto}")
+     print(f"incorrecto: {incorrecto}")
      aumentar = int(input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
      if aumentar == 1:
+     
       aumento += 10
       if falta_de_cancion >= aumento:
        print("ejecutar1")
@@ -69,8 +72,18 @@ class op:
         pygame.mixer.music.play(start=inicio-decremento)
         time.sleep(aumento)
         pygame.mixer.music.stop()
+     elif aumentar == 2:
+        op_usario = input("ingrese el nombre del anime: ")
+        if op.aciertos_op(op_usario,op.op_azar):
+           print("¡CORRECTO!")
+           correcto +=1
+        else:
+           print("INCORRECTO")
+           incorrecto +=1
  def  aciertos_op(nombre_usuario,nombre_real):
-       similitud = SequenceMatcher(None,nombre_usuario,nombre_real)
+       nombre_usuario = nombre_usuario.lower().strip()
+       nombre_real =nombre_real.lower().strip()
+       similitud = SequenceMatcher(None,nombre_usuario,nombre_real).ratio()
        if similitud > 0.8:
           return True
        else:
