@@ -35,51 +35,58 @@ class op:
     return duracion
 
  def reproductor_incremento():
-    cancion = op.seleccion_cancion_azar()
-    duracion = op.calcular_duracion_cancion(cancion)
-    print(op.op_azar)
-    aumento = 10
-    decremento = 0
     correcto = 0
     incorrecto = 0
-    inicio = random.randint(0,duracion-10)
-    falta_de_cancion= duracion-inicio
-    pygame.mixer.music.load(cancion)
-    pygame.mixer.music.play(start=inicio)
-    time.sleep(aumento)
-    pygame.mixer.music.stop()
     while True:
-     print(f"correctos: {correcto}")
-     print(f"incorrecto: {incorrecto}")
-     aumentar = int(input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
-     if aumentar == 1:
-     
-      aumento += 10
-      if falta_de_cancion >= aumento:
-       print("ejecutar1")
-       pygame.mixer.music.play(start=inicio)
-       time.sleep(aumento)
-       pygame.mixer.music.stop()
-      elif (aumento+decremento) >=duracion:
-         print("ejecutar 3")
-         pygame.mixer.music.play()
-         time.sleep(duracion)
-         pygame.mixer.music.stop()
-      else:
-        aumento += 10
-        decremento +=10
-        print("ejecutar2")
-        pygame.mixer.music.play(start=inicio-decremento)
+     cancion = op.seleccion_cancion_azar()
+     duracion = op.calcular_duracion_cancion(cancion)
+     print(op.op_azar)
+     aumento = 10
+     decremento = 0
+     inicio = random.randint(0,duracion-10)
+     falta_de_cancion= duracion-inicio
+     pygame.mixer.music.load(cancion)
+     pygame.mixer.music.play(start=inicio)
+     time.sleep(aumento)
+     pygame.mixer.music.stop()
+     while True:
+      aumentar = int(input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
+      if aumentar == 1:
+       aumento += 10
+       if falta_de_cancion >= aumento:
+        print("ejecutar1")
+        pygame.mixer.music.play(start=inicio)
         time.sleep(aumento)
         pygame.mixer.music.stop()
-     elif aumentar == 2:
-        op_usario = input("ingrese el nombre del anime: ")
-        if op.aciertos_op(op_usario,op.op_azar):
-           print("¡CORRECTO!")
-           correcto +=1
-        else:
-           print("INCORRECTO")
-           incorrecto +=1
+       elif (aumento+decremento) >=duracion:
+          print("ejecutar 3")
+          pygame.mixer.music.play()
+          time.sleep(duracion)
+          pygame.mixer.music.stop()
+       else:
+         aumento += 10
+         decremento +=10
+         print("ejecutar2")
+         pygame.mixer.music.play(start=inicio-decremento)
+         time.sleep(aumento)
+         pygame.mixer.music.stop()
+      elif aumentar == 2:
+         op_usario = input("ingrese el nombre del anime: ")
+         if op.aciertos_op(op_usario,op.op_azar):
+            correcto +=1
+            print(f"""¡CORRECTO!
+                       Acertadas: {correcto}
+                       Incorrectas: {incorrecto}
+                  """)
+            break
+         else:
+            incorrecto +=1
+            print(f"""INCORRECTO
+                   Acertadas: {correcto}
+                   Incorrectas: {incorrecto}
+                  
+                  """)
+            break
  def  aciertos_op(nombre_usuario,nombre_real):
        nombre_usuario = nombre_usuario.lower().strip()
        nombre_real =nombre_real.lower().strip()
