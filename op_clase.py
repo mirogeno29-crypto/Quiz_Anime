@@ -3,6 +3,7 @@ import random
 import time
 from difflib import SequenceMatcher
 import os
+from colorama import Fore, Style, init
 pygame.mixer.init()
 def limpiar_pantalla():
        os.system("cls" if os.name == "nt" else "clear")
@@ -10,6 +11,8 @@ def limpiar_pantalla():
 
 class op:
  op_azar = None
+ correcto = 0
+ incorrecto = 0
  nombre_openings = {
  "Future Diary":  "audios anime/Mirai Nikki.mp3",   
   "Neon Genesis Evangelion":   "audios anime/Evangelion.mp3",
@@ -35,14 +38,18 @@ class op:
     return duracion
 
  def reproductor_incremento():
-    correcto = 0
-    incorrecto = 0
+    
+    
     while True:
+     if not op.nombre_openings:
+       print(f"""fin del juego tus puntuaciones son:
+             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
+             """)
+       return
      cancion = op.seleccion_cancion_azar()
      op.nombre_openings.pop(op.op_azar)
-     print(op.nombre_openings)
      duracion = op.calcular_duracion_cancion(cancion)
-     print(op.op_azar)
      aumento = 10
      decremento = 0
      inicio = random.randint(0,duracion-10)
@@ -52,39 +59,39 @@ class op:
      time.sleep(aumento)
      pygame.mixer.music.stop()
      while True:
-      aumentar = int(input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
-      if aumentar == 1:
+      aumentar = (input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
+      if aumentar == "1":
        aumento += 10
        if falta_de_cancion >= aumento:
-        print("ejecutar1")
         pygame.mixer.music.play(start=inicio)
         time.sleep(aumento)
         pygame.mixer.music.stop()
        elif (aumento+decremento) >=duracion:
-          print("ejecutar 3")
           pygame.mixer.music.play()
           time.sleep(duracion)
           pygame.mixer.music.stop()
        else:
          decremento +=10
-         print("ejecutar2")
          pygame.mixer.music.play(start=inicio-decremento)
          time.sleep(aumento)
          pygame.mixer.music.stop()
-      elif aumentar == 2:
+      elif aumentar == "2":
          op_usario = input("ingrese el nombre del anime: ")
          if op.aciertos_op(op_usario,op.op_azar):
-            correcto +=1
-            print(f"""¡CORRECTO!
-                       Acertadas: {correcto}
-                       Incorrectas: {incorrecto}
+            op.correcto +=1
+            os.system("cls" if os.name == "nt" else "clear")
+            print(f"""{Fore.GREEN}¡CORRECTO!{Style.RESET_ALL}
+             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
                   """)
             break
          else:
-            incorrecto +=1
-            print(f"""INCORRECTO
-                   Acertadas: {correcto}
-                   Incorrectas: {incorrecto}
+            op.incorrecto +=1
+            os.system("cls" if os.name == "nt" else "clear")
+            print(f"""{Fore.RED}INCORRECTO{Style.RESET_ALL}
+                        Opcion correcta: {op.op_azar}
+             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
                   
                   """)
             break
