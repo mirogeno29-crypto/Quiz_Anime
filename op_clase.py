@@ -10,8 +10,7 @@ def limpiar_pantalla():
 
 class op:
  op_azar = None
- def seleccion_cancion_azar(): 
-  nombre_openings = {
+ nombre_openings = {
  "Future Diary":  "audios anime/Mirai Nikki.mp3",   
   "Neon Genesis Evangelion":   "audios anime/Evangelion.mp3",
   "JoJo's Bizarre Adventure" : "audios anime/jojo op2.mp3",
@@ -22,11 +21,12 @@ class op:
   "One Piece" : "audios anime/one piece.mp3",
   "Attack on Titan" : "audios anime/shingeki no kiojin.mp3",
   "Jujutsu Kaisen" : "audios anime/JUJUTSU KAISEN Opening.mp3",}
-  claves = nombre_openings.keys()
+ def seleccion_cancion_azar(): 
+  claves = op.nombre_openings.keys()
   claves = list(claves)
   op.op_azar = random.choice(claves)
   
-  return nombre_openings[op.op_azar]
+  return op.nombre_openings[op.op_azar]
 
  def calcular_duracion_cancion(cancion):
     audio = pygame.mixer.Sound(cancion)
@@ -39,6 +39,8 @@ class op:
     incorrecto = 0
     while True:
      cancion = op.seleccion_cancion_azar()
+     op.nombre_openings.pop(op.op_azar)
+     print(op.nombre_openings)
      duracion = op.calcular_duracion_cancion(cancion)
      print(op.op_azar)
      aumento = 10
@@ -64,7 +66,6 @@ class op:
           time.sleep(duracion)
           pygame.mixer.music.stop()
        else:
-         aumento += 10
          decremento +=10
          print("ejecutar2")
          pygame.mixer.music.play(start=inicio-decremento)
