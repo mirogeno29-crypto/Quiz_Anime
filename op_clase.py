@@ -42,7 +42,9 @@ class op:
     
     while True:
      if not op.nombre_openings:
-       print(f"""fin del juego tus puntuaciones son:
+       print(f"""
+             opcion correcta: {op.op_azar}
+             fin del juego tus puntuaciones son:
              {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
              {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
              """)
