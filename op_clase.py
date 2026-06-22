@@ -24,6 +24,17 @@ class op:
   "One Piece" : "audios anime/one piece.mp3",
   "Attack on Titan" : "audios anime/shingeki no kiojin.mp3",
   "Jujutsu Kaisen" : "audios anime/JUJUTSU KAISEN Opening.mp3",}
+ nombre_openings_japones = {
+    "Mirai Nikki" : "Future Diary",
+    "Shin Seiki Evangelion" : "Neon Genesis Evangelion",
+    "JoJo no Kimyou na Bouken": "JoJo's Bizarre Adventure",
+    "Kimetsu no Yaiba":"Demon Slayer" ,
+    "Kobayashi-san Chi no Maid Dragon": "Miss Kobayashi's Dragon Maid",
+    "Boku no Hero Academia": "My Hero Academia",
+    "Nekomonogatari": "Monogatari Series",
+    "Wan Piisu": "One Piece",
+    "shingeki no kyojin": "Attack on Titan",
+    "Jujutsu Kaisen": "Jujutsu Kaisen"}
  def seleccion_cancion_azar(): 
   claves = op.nombre_openings.keys()
   claves = list(claves)
@@ -42,6 +53,7 @@ class op:
     
     while True:
      if not op.nombre_openings:
+       os.system("cls" if os.name == "nt" else "clear")
        print(f"""
              opcion correcta: {op.op_azar}
              fin del juego tus puntuaciones son:
@@ -98,6 +110,7 @@ class op:
                   """)
             break
  def  aciertos_op(nombre_usuario,nombre_real):
+       nombre_usuario = op.convertir_japones_a_ingles(nombre_usuario)
        nombre_usuario = nombre_usuario.lower().strip()
        nombre_real =nombre_real.lower().strip()
        similitud = SequenceMatcher(None,nombre_usuario,nombre_real).ratio()
@@ -106,7 +119,20 @@ class op:
        else:
           return False
        
- 
+ def convertir_japones_a_ingles(japones):
+      japones = japones.lower().strip()
+      claves = op.nombre_openings_japones.keys()
+      claves = list(claves)
+      for i in claves:
+       e = i.lower().strip()
+       similitud = SequenceMatcher(None,japones,e).ratio()
+       if similitud > 0.8:
+          return op.nombre_openings_japones[i]
+      return japones
+    
+       
+    
+      
     
       
  
