@@ -24,6 +24,7 @@ class op:
   "One Piece" : "audios anime/one piece.mp3",
   "Attack on Titan" : "audios anime/shingeki no kiojin.mp3",
   "Jujutsu Kaisen" : "audios anime/JUJUTSU KAISEN Opening.mp3",}
+ nombre_openings_copia = nombre_openings.copy()
  nombre_openings_japones = {
     "Mirai Nikki" : "Future Diary",
     "Shin Seiki Evangelion" : "Neon Genesis Evangelion",
@@ -53,12 +54,13 @@ class op:
     
     while True:
      if not op.nombre_openings:
-       os.system("cls" if os.name == "nt" else "clear")
+       op.nombre_openings = op.nombre_openings_copia.copy()
+       limpiar_pantalla()
        print(f"""
-             opcion correcta: {op.op_azar}
-             fin del juego tus puntuaciones son:
-             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
-             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
+opcion correcta: {op.op_azar}
+fin del juego tus puntuaciones son:
+{Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+{Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
              """)
        return
      cancion = op.seleccion_cancion_azar()
@@ -73,7 +75,7 @@ class op:
      time.sleep(aumento)
      pygame.mixer.music.stop()
      while True:
-      aumentar = (input("quieres aumentar la duracion de la cancion 1.si 2.no: "))
+      aumentar = (input("ingrese el nombre del anime, si quieres aumentar la duracion de la cancion ingrese 1: "))
       if aumentar == "1":
        aumento += 10
        if falta_de_cancion >= aumento:
@@ -89,23 +91,24 @@ class op:
          pygame.mixer.music.play(start=inicio-decremento)
          time.sleep(aumento)
          pygame.mixer.music.stop()
-      elif aumentar == "2":
-         op_usario = input("ingrese el nombre del anime: ")
-         if op.aciertos_op(op_usario,op.op_azar):
+      else:
+         if op.aciertos_op(aumentar,op.op_azar):
             op.correcto +=1
-            os.system("cls" if os.name == "nt" else "clear")
-            print(f"""{Fore.GREEN}¡CORRECTO!{Style.RESET_ALL}
-             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
-             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
+            limpiar_pantalla()
+            print(f"""
+{Fore.GREEN}¡CORRECTO!{Style.RESET_ALL}
+{Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+{Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
                   """)
             break
          else:
             op.incorrecto +=1
-            os.system("cls" if os.name == "nt" else "clear")
-            print(f"""{Fore.RED}INCORRECTO{Style.RESET_ALL}
-                        Opcion correcta: {op.op_azar}
-             {Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
-             {Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
+            limpiar_pantalla()
+            print(f"""
+{Fore.RED}INCORRECTO{Style.RESET_ALL}
+Opcion correcta: {op.op_azar}
+{Fore.GREEN}Acertadas: {op.correcto}{Style.RESET_ALL}
+{Fore.RED}Incorrectas: {op.incorrecto}{Style.RESET_ALL}
                   
                   """)
             break
