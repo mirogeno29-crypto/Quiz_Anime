@@ -9,21 +9,33 @@ def limpiar_pantalla():
        os.system("cls" if os.name == "nt" else "clear")
 
 
+
 class op:
+#[ruta,nombre_japones,nombre_ingles,nombre_cancion,artista_cancion,temporada_utilizo,numero_opening]
+ mirai_nikki = ["audios anime/Mirai Nikki.mp3","Mirai Nikki", "Future Diary", "Kuusou Mesorogiwi", "Yousei Teikoku", "Temporada 1", 1]
+ shin_seiki_evangelion = ["audios anime/Evangelion.mp3","Shin Seiki Evangelion", "Neon Genesis Evangelion", "A Cruel Angel's Thesis", "Yoko Takahashi", "Temporada 1", 1]
+ jojo_no_kimyou_na_bouken = ["JoJo no Kimyou na Bouken", "JoJo's Bizarre Adventure", "Sono Chi no Sadame", "Hiroaki Tommy Tominaga", "Phantom Blood", 1]
+ kimetsu_no_yaiba = ["audios anime/kimetsu no yaiba.mp3","Kimetsu no Yaiba", "Demon Slayer", "Gurenge", "LiSA", "Temporada 1", 1]
+ kobayashi_san_chi_no_maid_dragon = ["audios anime/Miss Kobayashi's Dragon Maid.mp3","Kobayashi-san Chi no Maid Dragon", "Miss Kobayashi's Dragon Maid", "Aozora no Rhapsody", "fhána", "Temporada 1", 1]
+ boku_no_hero_academia = "audios anime/My heroe academia.mp3",["Boku no Hero Academia", "My Hero Academia", "The Day", "Porno Graffitti", "Temporada 1", 1]
+ nekomonogatari = ["audios anime/Nekomonogatari.mp3","Nekomonogatari", "Monogatari Series", "Chocolate Insomnia", "Yui Horie", "Kuro", 1]
+ wan_piisu = ["audios anime/one piece.mp3","Wan Piisu", "One Piece", "We Are!", "Hiroshi Kitadani", "East Blue", 1]
+ shingeki_no_kyojin = ["audios anime/shingeki no kiojin.mp3","Shingeki no Kyojin", "Attack on Titan", "Guren no Yumiya", "Linked Horizon", "Temporada 1", 1]
+ jujutsu_kaisen = ["audios anime/JUJUTSU KAISEN Opening.mp3","Jujutsu Kaisen", "Jujutsu Kaisen", "Kaikai Kitan", "Eve", "Temporada 1", 1]
  op_azar = None
  correcto = 0
  incorrecto = 0
  nombre_openings = {
- "Future Diary":  "audios anime/Mirai Nikki.mp3",   
-  "Neon Genesis Evangelion":   "audios anime/Evangelion.mp3",
-  "JoJo's Bizarre Adventure" : "audios anime/jojo op2.mp3",
-  "Demon Slayer" : "audios anime/kimetsu no yaiba.mp3",
-  "Miss Kobayashi's Dragon Maid" : "audios anime/Miss Kobayashi's Dragon Maid.mp3",
-  "My Hero Academia" : "audios anime/My heroe academia.mp3",
-  "Monogatari Series" : "audios anime/Nekomonogatari.mp3",
-  "One Piece" : "audios anime/one piece.mp3",
-  "Attack on Titan" : "audios anime/shingeki no kiojin.mp3",
-  "Jujutsu Kaisen" : "audios anime/JUJUTSU KAISEN Opening.mp3",}
+ "Future Dia ry": mirai_nikki,
+  "Neon Genesis Evangelion":   shin_seiki_evangelion,
+  "JoJo's Bizarre Adventure" : jojo_no_kimyou_na_bouken,
+  "Demon Slayer" : kimetsu_no_yaiba,
+  "Miss Kobayashi's Dragon Maid" : kobayashi_san_chi_no_maid_dragon,
+  "My Hero Academia" : boku_no_hero_academia,
+  "Monogatari Series" : nekomonogatari,
+  "One Piece" : wan_piisu,
+  "Attack on Titan" : shingeki_no_kyojin,
+  "Jujutsu Kaisen" : jujutsu_kaisen,}
  nombre_openings_copia = nombre_openings.copy()
  nombre_openings_japones = {
     "Mirai Nikki" : "Future Diary",
@@ -50,11 +62,12 @@ class op:
     return duracion
 
  def reproductor_incremento():
-    
-    
     while True:
      if not op.nombre_openings:
        op.nombre_openings = op.nombre_openings_copia.copy()
+       op.correcto = 0
+       op.incorrecto = 0
+       op
        limpiar_pantalla()
        print(f"""
 opcion correcta: {op.op_azar}
