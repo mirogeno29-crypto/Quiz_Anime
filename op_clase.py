@@ -26,7 +26,7 @@ class op:
  correcto = 0
  incorrecto = 0
  nombre_openings = {
- "Future Dia ry": mirai_nikki,
+ "Future Diari ": mirai_nikki,
   "Neon Genesis Evangelion":   shin_seiki_evangelion,
   "JoJo's Bizarre Adventure" : jojo_no_kimyou_na_bouken,
   "Demon Slayer" : kimetsu_no_yaiba,
