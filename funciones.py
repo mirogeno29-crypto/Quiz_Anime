@@ -10,7 +10,16 @@ pygame.mixer.init()
 def limpiar_pantalla():
     
     os.system("cls" if os.name == "nt" else "clear")
- 
+    
+def comparacion_palabras_multiples(nombre_usuario, nombre_ingles, nombre_japones):
+    similitud_japones = SequenceMatcher(None, nombre_usuario.lower(),nombre_ingles.lower()).ratio()
+    similitud_ingles = SequenceMatcher(None, nombre_usuario.lower(),nombre_japones.lower()).ratio()
+    if similitud_japones >= 0.8 or similitud_ingles >=0.8:
+        return True
+    else:
+        return False    
+    
+
 def op_azar():
     
     muchas_clases = {
@@ -29,13 +38,13 @@ def op_azar():
     valor = muchas_clases[clave]
     return valor
 
-def duracion_op(op):
+def duracion_op(ruta_op):
     sonido = pygame.mixer.Sound(op.ruta)
     duracion = sonido.get_length()
     return duracion
 
-def reproductor(op,inicio,final):
-    pygame.mixer.music.load(op)
+def reproductor(ruta_op,inicio,final):
+    pygame.mixer.music.load(ruta_op)
     pygame.mixer.music.play(start= inicio)
     time.sleep(final)
     pygame.mixer.music.stop()
@@ -51,60 +60,21 @@ def reproductor_primario(op,inicio):
     reproductor(ruta,inicio,final)
     
     
-#Reproduce 20 segundos hacia adelante hasta que no hay mas tiempo y empieza a reproducir hacia atras
-#hasta que tampoco hay mas tiempo    
-def Reproductor_secundario(op,inicio,duracion,final,decremento):
+#Reproduce 10 segundos al azar de la ruta de op que se le pase depues pregunta el nombre del anime y devuelve true si es correcto y false si no
+#ademas te da la opcion de extender el audio hasta reproducirlo completo    
+def Reproductor_op(ruta_op,nombre_ingles,nombre_japones):
     #Datos
-     ruta = op.ruta
-     final = final
-     falta_terminar = duracion-inicio
-     decremento = decremento
-     duracion = duracion
-     
-     #ejecucion
-     if final < falta_terminar:
-        print("ejecucion 2")
-        reproductor(ruta,inicio,final)
-        final +=10
-     elif final+decremento < duracion:
-          print("ejecucion 3")
-          reproductor(ruta,inicio-decremento,final)
-          decremento += 10
-     else:
-          return
-     
-     
-     #condiciones
-
-
-#Reproduce todo el opening completo     
-def Reproductor_terciario(op,duracion): 
-    ruta = op.ruta
-    print("ejecucion 4")
-    reproductor(ruta,0,duracion)
-         
-def reproductor_final():
-    #Datos 
-    clase_opening = op_azar()
-    duracion = int(duracion_op(clase_opening))
-    inicio = random.randint(0,duracion-10)
-    op_nombres = [clase_opening.nombre_ingles,clase_opening.nombre_ingles]
-    final = 10
-    decremento = 10
-    Correcto = 0
-    Incorrecto = 0
+    duracion = duracion_op(ruta_op)
+    inicio_azar = random.randint(0,duracion-10) 
+    final_aumento = 10
     
     #ejecucion
-    op_usuario = input("ingrese el nombre del op, o ingrese  s para alargar el audio")
-    if op_nombres == "s":
-     #Reproductor primario
-     reproductor_primario(clase_opening,inicio)
-     #reproductor secundario
-     Reproductor_secundario(clase_opening,inicio,duracion,final,decremento)
-     #Reproductor terciario
-     Reproductor_terciario(clase_opening,duracion)
-    elif op_usuario in op_nombres:
-        print("Correcto")
-        
-      
+    reproductor(ruta_op,inicio_azar,final_aumento)
+    op_usuario = input("ingrese el nombre del opening, ingrese 's' para aumentar el tiempo")
+    if op_usuario == comparacion_palabras_multiples(op_usuario,nombre_ingles,nombre_japones):
+        pass
+
      
+def prueba():
+    p = comparacion_palabras_multiples("jhytrew","Future Diary","Mirai Nikki")
+    print(p)
