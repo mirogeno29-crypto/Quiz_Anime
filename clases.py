@@ -9,6 +9,8 @@ class op_animes():
      self.artista = artista
      self.temporada_utilizo = temporada_utilizo
      self.numero_opening = numero_opening
+  
+ 
      
 Mirai_Nikki = op_animes("audios anime/Mirai Nikki.mp3", "Mirai Nikki", "Future Diary", "Kuusou Mesorogiwi", "Yousei Teikoku", 1, 1)
 Shin_Seiki_Evangelion = op_animes("audios anime/Evangelion.mp3", "Shin Seiki Evangelion", "Neon Genesis Evangelion", "A Cruel Angel's Thesis", "Yoko Takahashi", 1, 1)
@@ -20,7 +22,7 @@ Monogatari = op_animes("audios anime/Nekomonogatari.mp3", "Monogatari", "Monogat
 Wan_Piisu = op_animes("audios anime/one piece.mp3", "Wan Piisu", "One Piece", "We Are!", "Hiroshi Kitadani", 1, 1)
 Shingeki_no_Kyojin = op_animes("audios anime/shingeki no kiojin.mp3", "Shingeki no Kyojin", "Attack on Titan", "Guren no Yumiya", "Linked Horizon", 1, 1)
 Jujutsu_Kaisen = op_animes("audios anime/JUJUTSU KAISEN Opening.mp3", "Jujutsu Kaisen", "Jujutsu Kaisen", "Kaikai Kitan", "Eve", 1, 1)
-
+ 
 
 
 

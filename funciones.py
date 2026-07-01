@@ -11,6 +11,21 @@ def limpiar_pantalla():
     
     os.system("cls" if os.name == "nt" else "clear")
     
+Animes = {
+    
+"Mirai nikki" : clases.Mirai_Nikki,   
+"evangelion" : clases.Shin_Seiki_Evangelion,
+"Jojos": clases.JoJo_no_Kimyou_na_Bouken,
+"Kimetsu no yaiba": clases.Kimetsu_no_Yaiba,
+"Kobayashi": clases.Kobayashi_san_Chi_no_Maid_Dragon,
+"Bokuno heroe": clases.Boku_no_Hero_Academia,
+"Monogatari": clases.Monogatari,
+"One piece": clases.Wan_Piisu,
+"Shingeki no Kyojin": clases.Shingeki_no_Kyojin,
+"Jujutsu kaisen": clases.Jujutsu_Kaisen,
+}    
+    
+    
 def comparacion_palabras_multiples(nombre_usuario, nombre_ingles, nombre_japones):
     similitud_japones = SequenceMatcher(None, nombre_usuario.lower(),nombre_ingles.lower()).ratio()
     similitud_ingles = SequenceMatcher(None, nombre_usuario.lower(),nombre_japones.lower()).ratio()
@@ -20,61 +35,49 @@ def comparacion_palabras_multiples(nombre_usuario, nombre_ingles, nombre_japones
         return False    
     
 
-def op_azar():
-    
-    muchas_clases = {
-        
-    "monogatari":clases.monogatari,
-    "Bokuno Heroe":clases.Boku_no_Hero_Academia,
-    "jojos": clases.JoJo_no_Kimyou_na_Bouken,
-    "jujutsu_kaisen": clases.Jujutsu_Kaisen,
-    "Mirai_Nikki": clases.Mirai_Nikki,
-    "One piece": clases.Wan_Piisu,
-    "Kobayashi": clases.Kobayashi_san_Chi_no_Maid_Dragon,
-    "evanegelion": clases.Shin_Seiki_Evangelion,
-    "Shingeki no Kyojin":clases.Shingeki_no_Kyojin,
-    "Kimetsu no yaiba": clases.Kimetsu_no_Yaiba,}
-    clave = random.choice(list(muchas_clases))
-    valor = muchas_clases[clave]
-    return valor
-
-def duracion_op(ruta_op):
-    sonido = pygame.mixer.Sound(op.ruta)
+def duracion_op(Anime):
+    sonido = pygame.mixer.Sound(Anime.ruta)
     duracion = sonido.get_length()
     return duracion
 
-def reproductor(ruta_op,inicio,final):
-    pygame.mixer.music.load(ruta_op)
+def reproductor(anime,inicio,final):
+    pygame.mixer.music.load(anime.ruta)
     pygame.mixer.music.play(start= inicio)
     time.sleep(final)
     pygame.mixer.music.stop()
 
-#Reproduce solo 10 segundos de la cancion al azar 
-def reproductor_primario(op,inicio):
-    #Datos 
-    ruta = op.ruta
-    final = 10
-    
-    #ejecucion
-    print("ejecucion 1") 
-    reproductor(ruta,inicio,final)
-    
-    
-#Reproduce 10 segundos al azar de la ruta de op que se le pase depues pregunta el nombre del anime y devuelve true si es correcto y false si no
-#ademas te da la opcion de extender el audio hasta reproducirlo completo    
-def Reproductor_op(ruta_op,nombre_ingles,nombre_japones):
-    #Datos
-    duracion = duracion_op(ruta_op)
-    inicio_azar = random.randint(0,duracion-10) 
-    final_aumento = 10
-    
-    #ejecucion
-    reproductor(ruta_op,inicio_azar,final_aumento)
-    op_usuario = input("ingrese el nombre del opening, ingrese 's' para aumentar el tiempo")
-    if op_usuario == comparacion_palabras_multiples(op_usuario,nombre_ingles,nombre_japones):
-        pass
-
+# ejecuat todo lo de william y de vuelve correcto o incorrecto si el usuario acerto o no
+def Reproductor_op(Anime):
+    duracion = int(duracion_op(Anime))
+    inicio  = random.randint(0,duracion-10) 
+    final  = 10
+    while True:
+     reproductor(Anime,inicio,final)
+     op_usuario = input("ingrese el nombre del opening, ingrese 's' para aumentar el tiempo")
+     op_usuario = op_usuario.lower()
+     if  comparacion_palabras_multiples(op_usuario,Anime.nombre_ingles,Anime.nombre_japones):
+        print("CORRECTO")
+        return True
+     elif op_usuario == "s":
+         if (inicio + final) < duracion+5:
+             final += 10
+         elif inicio > 0:
+              final = duracion - inicio
+              inicio -= 10
+              if inicio < 0:
+                  inicio = 0
+              
+     else:
+        print("INCORRECTO")
+        return False          
+               
+               
+               
+               
+def ejecucion():
+    Correctas = 0
+    incorrectas = 0
      
+    
 def prueba():
-    p = comparacion_palabras_multiples("jhytrew","Future Diary","Mirai Nikki")
-    print(p)
+    Reproductor_op(Animes["Mirai nikki"])
