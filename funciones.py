@@ -24,7 +24,7 @@ Animes = {
 "Shingeki no Kyojin": clases.Shingeki_no_Kyojin,
 "Jujutsu kaisen": clases.Jujutsu_Kaisen,
 }    
-    
+Animes2 = Animes
     
 def comparacion_palabras_multiples(nombre_usuario, nombre_ingles, nombre_japones):
     similitud_japones = SequenceMatcher(None, nombre_usuario.lower(),nombre_ingles.lower()).ratio()
@@ -77,13 +77,19 @@ def Reproductor_op(Anime):
         print("INCORRECTO")
         return False          
                
-               
+def selecion_op_azar():
+     clave = random.choice(list(Animes2.keys()))
+     valor = Animes2[clave]
+     del Animes2[clave]
+     return valor
+        
                
                
 def ejecucion():
     Correctas = 0
     incorrectas = 0
-     
+    print("se reproducira un fragmento del op de un anime, intente adivinarlo y alargue el tiempo si lo consideras necesario")
+    Reproductor_op()
     
 def prueba():
     a = Reproductor_op(Animes["Mirai nikki"])
