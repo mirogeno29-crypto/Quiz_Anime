@@ -53,19 +53,25 @@ def Reproductor_op(Anime):
     final  = 10
     while True:
      reproductor(Anime,inicio,final)
-     op_usuario = input("ingrese el nombre del opening, ingrese 's' para aumentar el tiempo")
+     op_usuario = input("ingrese el nombre del opening, ingrese 's' para aumentar el tiempo: ")
      op_usuario = op_usuario.lower()
      if  comparacion_palabras_multiples(op_usuario,Anime.nombre_ingles,Anime.nombre_japones):
         print("CORRECTO")
+        print("if 1")
         return True
      elif op_usuario == "s":
-         if (inicio + final) < duracion+5:
+         print("if 2")
+         if (inicio + final) < duracion-8:
              final += 10
+             print("if 3")
          elif inicio > 0:
-              final = duracion - inicio
               inicio -= 10
+              final = duracion - inicio
+              print("if 4")
               if inicio < 0:
+                  print("if 5")
                   inicio = 0
+                  final = duracion
               
      else:
         print("INCORRECTO")
@@ -80,4 +86,5 @@ def ejecucion():
      
     
 def prueba():
-    Reproductor_op(Animes["Mirai nikki"])
+    a = Reproductor_op(Animes["Mirai nikki"])
+    print(a)
